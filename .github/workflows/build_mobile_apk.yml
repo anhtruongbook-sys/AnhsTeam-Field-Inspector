@@ -1,0 +1,74 @@
+name: Build Anh's TEAM Field Inspector (APK)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Verify Flutter & Dart Environment
+        run: |
+          flutter --version
+          dart --version
+
+      - name: Install Flutter Dependencies
+        working-directory: ./mobile_app
+        run: flutter pub get
+
+      - name: Build Android Release APK
+        working-directory: ./mobile_app
+        run: flutter build apk --release --android-skip-build-dependency-validation
+
+      - name: Prepare Single APK
+        run: |
+          mkdir -p build-output
+          if [ -f mobile_app/build/app/outputs/flutter-apk/app-release.apk ]; then
+            cp mobile_app/build/app/outputs/flutter-apk/app-release.apk build-output/AnhsTeam_FieldInspector.apk
+          else
+            cp mobile_app/build/app/outputs/flutter-apk/*.apk build-output/AnhsTeam_FieldInspector.apk
+          fi
+
+      - name: Upload Release APK Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: AnhsTeam_FieldInspector-mobile-release-apk
+          path: build-output/AnhsTeam_FieldInspector.apk
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Create or Update GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/heads/main')
+        with:
+          tag_name: v1.0.0
+          name: "Anh's TEAM - Kiểm Tra, Khảo Sát & Giám Sát Hiện Trường v1.0.0 (Android APK)"
+          body: |
+            ## Ứng Dụng Kiểm Tra, Khảo Sát & Giám Sát Hiện Trường - Anh's TEAM
+            - **Chụp ảnh hiện trường & Dán cứng Bảng thông tin kỹ thuật lên ảnh**: Tự động đọc tọa độ GNSS/GPS, góc phương vị La bàn, Thời gian thực và dán cứng Bảng thông tin nghiệm thu + mã băm `SHA-256` vào từng điểm ảnh (`.jpg`).
+            - **Bảng kiểm tra (Checklist) chuyên ngành & Ghi âm hiện trường**: Tự động tính tỷ lệ tuân thủ kỹ thuật (%), hỗ trợ đọc số liệu bằng giọng nói và ghi âm thuyết minh hiện trường `16kHz PCM WAV`.
+            - **Xuất Biên bản nghiệm thu hiện trường (`.docx`)**: Định dạng chuẩn Nghị định số 30/2020/NĐ-CP và Điều 22 Nghị định số 207/2026/NĐ-CP.
+          files: build-output/AnhsTeam_FieldInspector.apk
+          draft: false
+          prerelease: false

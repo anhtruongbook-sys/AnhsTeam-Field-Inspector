@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Máy Ảnh Hiện Trường & Đóng Dấu Kỹ Thuật (NĐ 207/2026/NĐ-CP)</title>
+  <style>
+    :root {
+      --bg-main: #0f172a;
+      --card-bg: #1e293b;
+      --border-col: #334155;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --accent: #3b82f6;
+      --success: #22c55e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      padding: 16px;
+      line-height: 1.5;
+    }
+    .app-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+    .single-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-col);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .section-divider {
+      border: none !important;
+      border-top: 1px dashed var(--border-col) !important;
+      padding: 16px 0 0 0 !important;
+      margin-top: 16px;
+      background: transparent !important;
+    }
+    .left-accent-box {
+      border: none !important;
+      border-left: 3px solid var(--accent) !important;
+      border-radius: 0 8px 8px 0 !important;
+      padding: 8px 14px;
+      background: rgba(59, 130, 246, 0.08);
+      margin-bottom: 16px;
+    }
+    h1 { font-size: 1.3rem; margin-bottom: 4px; }
+    .subtitle { font-size: 0.9rem; color: var(--text-sub); }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 20px;
+    }
+    .form-group { margin-bottom: 12px; }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 4px;
+    }
+    input, select {
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-col);
+      background: #0f172a;
+      color: var(--text-main);
+      font-size: 0.92rem;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    button, .file-label {
+      cursor: pointer;
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #fff;
+      background: var(--accent);
+    }
+    button.secondary, .file-label { background: #475569; }
+    button.success { background: var(--success); color: #052e16; }
+    canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border-col);
+      background: #090d16;
+      display: block;
+    }
+    video {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="single-card">
+      <div class="left-accent-box">
+        <h1>MÁY ẢNH HIỆN TRƯỜNG & DÁN BẢNG THÔNG TIN KỸ THUẬT LÊN ẢNH</h1>
+        <p class="subtitle">Hoạt động độc lập 100% Offline — Đóng dấu Tọa độ GNSS, Hướng La bàn, Thời gian thực & Trục cấu kiện theo Nghị định số 207/2026/NĐ-CP</p>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <div class="form-group">
+            <label>1. Tên dự án / Mã công trình</label>
+            <input type="text" id="projectInput" value="Tòa nhà Trung tâm R&D Công nghệ (DA01-IBST)" />
+          </div>
+          <div class="form-group">
+            <label>2. Hạng mục kiểm tra / khảo sát / nghiệm thu</label>
+            <input type="text" id="workItemInput" value="Kiểm tra cốt thép & lớp bê tông bảo vệ dầm sàn" />
+          </div>
+          <div class="form-group">
+            <label>3. Vị trí Khu vực / Trục định vị / Cao độ</label>
+            <input type="text" id="zoneAxisInput" value="Tầng hầm B1 - Trục (B-C)/(3-4) - Cao độ -4.50m" />
+          </div>
+          <div class="form-group">
+            <label>4. Tọa độ GNSS/GPS & Hướng nhìn La bàn</label>
+            <input type="text" id="gpsInput" value="21.004512°N, 105.798234°E (±1.5m) | Hướng: 135° ĐN" />
+          </div>
+          <div class="form-group">
+            <label>5. Kết quả đo thực tế & Đánh giá kỹ thuật</label>
+            <input type="text" id="resultInput" value="Thép D25 CB500-V; Lớp bảo vệ a = 26mm (ĐẠT - TCVN 4453)" />
+          </div>
+          <div class="form-group">
+            <label>6. Cán bộ kiểm tra / giám sát tại hiện trường</label>
+            <input type="text" id="inspectorInput" value="KS. Nguyễn Văn A (TVGS) - KS. Trần Văn B (NTTC)" />
+          </div>
+
+          <div class="btn-row">
+            <button type="button" onclick="fetchLiveGPS()">Lấy GPS thực tế</button>
+            <label class="file-label">
+              Chọn ảnh từ máy
+              <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileUpload(event)" />
+            </label>
+            <button type="button" class="secondary" onclick="startCamera()">Mở Camera trực tiếp</button>
+            <button type="button" class="success" onclick="downloadStampedImage()">Tải ảnh đã đóng dấu (.jpg)</button>
+          </div>
+        </div>
+
+        <div>
+          <video id="cameraPreview" autoplay playsinline></video>
+          <button type="button" id="captureBtn" style="display:none; margin-bottom:10px; width:100%;" onclick="captureFromVideo()">Chụp & Đóng dấu ngay</button>
+          <canvas id="stampCanvas" width="1600" height="1050"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('stampCanvas');
+    const ctx = canvas.getContext('2d');
+    let baseImage = null;
+    let videoStream = null;
+
+    function drawSimulatedFieldBackground() {
+      ctx.fillStyle = '#40464e';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = '#9ca3af';
+      ctx.lineWidth = 8;
+      for (let x = 100; x < canvas.width - 100; x += 90) {
+        ctx.beginPath(); ctx.moveTo(x, 80); ctx.lineTo(x, canvas.height - 80); ctx.stroke();
+      }
+      ctx.strokeStyle = '#8c94a0';
+      ctx.lineWidth = 7;
+      for (let y = 100; y < canvas.height - 100; y += 90) {
+        ctx.beginPath(); ctx.moveTo(80, y); ctx.lineTo(canvas.width - 80, y); ctx.stroke();
+      }
+    }
+
+    function renderStampOverlay() {
+      if (baseImage) {
+        canvas.width = baseImage.width;
+        canvas.height = baseImage.height;
+        ctx.drawImage(baseImage, 0, 0);
+      } else {
+        canvas.width = 1600;
+        canvas.height = 1050;
+        drawSimulatedFieldBackground();
+      }
+
+      const w = canvas.width;
+      const h = canvas.height;
+      const scale = Math.max(w, h) / 1600;
+      const nowStr = new Date().toLocaleString('vi-VN', { hour12: false }) + ' GMT+07:00';
+
+      // 1. Dải băng trên cùng
+      const topH = Math.round(48 * scale);
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.fillRect(0, 0, w, topH);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = `bold ${Math.round(18 * scale)}px "Segoe UI", Arial, sans-serif`;
+      ctx.fillText('CHỨNG CỨ KIỂM TRA - KHẢO SÁT - GIÁM SÁT HIỆN TRƯỜNG (NĐ 207/2026/NĐ-CP)', Math.round(18 * scale), Math.round(30 * scale));
+
+      // 2. Bảng thông tin kỹ thuật hiện trường góc dưới trái
+      const margin = Math.round(20 * scale);
+      const panelW = Math.min(w - 2 * margin, Math.round(880 * scale));
+      const lineH = Math.round(30 * scale);
+      const rows = [
+        ['DỰ ÁN:', document.getElementById('projectInput').value],
+        ['HẠNG MỤC KIỂM TRA:', document.getElementById('workItemInput').value],
+        ['VỊ TRÍ / TRỤC / CAO ĐỘ:', document.getElementById('zoneAxisInput').value],
+        ['TỌA ĐỘ GNSS / LA BÀN:', document.getElementById('gpsInput').value],
+        ['THỜI GIAN GHI NHẬN:', nowStr],
+        ['KẾT QUẢ ĐO / ĐÁNH GIÁ:', document.getElementById('resultInput').value],
+        ['CÁN BỘ HIỆN TRƯỜNG:', document.getElementById('inspectorInput').value]
+      ];
+      const headerH = Math.round(40 * scale);
+      const panelH = headerH + rows.length * lineH + Math.round(18 * scale);
+      const x0 = margin;
+      const y0 = h - panelH - margin;
+
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.86)';
+      ctx.fillRect(x0, y0, panelW, panelH);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(x0, y0, panelW, panelH);
+
+      ctx.fillStyle = 'rgba(30, 58, 138, 0.95)';
+      ctx.fillRect(x0, y0, panelW, headerH);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = `bold ${Math.round(20 * scale)}px "Segoe UI", Arial, sans-serif`;
+      ctx.fillText('BẢNG THÔNG TIN ĐỊNH VỊ & NGHIỆM THU HIỆN TRƯỜNG', x0 + Math.round(14 * scale), y0 + Math.round(27 * scale));
+
+      let currY = y0 + headerH + Math.round(24 * scale);
+      const labelW = Math.round(235 * scale);
+      rows.forEach((r, idx) => {
+        ctx.font = `bold ${Math.round(16 * scale)}px "Segoe UI", Arial, sans-serif`;
+        ctx.fillStyle = '#93c5fd';
+        ctx.fillText(r[0], x0 + Math.round(14 * scale), currY);
+
+        ctx.font = `${Math.round(16 * scale)}px "Segoe UI", Arial, sans-serif`;
+        ctx.fillStyle = r[1].includes('ĐẠT') ? '#86efac' : '#ffffff';
+        ctx.fillText(r[1], x0 + labelW, currY);
+        currY += lineH;
+      });
+    }
+
+    function handleFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = function() {
+          baseImage = img;
+          renderStampOverlay();
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function fetchLiveGPS() {
+      if (!navigator.geolocation) {
+        alert('Thiết bị không hỗ trợ Geolocation API.');
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          const lat = pos.coords.latitude.toFixed(6);
+          const lon = pos.coords.longitude.toFixed(6);
+          const acc = pos.coords.accuracy ? pos.coords.accuracy.toFixed(1) : '2.0';
+          document.getElementById('gpsInput').value = `${lat}°N, ${lon}°E (±${acc}m GPS)`;
+          renderStampOverlay();
+        },
+        err => alert('Không lấy được GPS: ' + err.message),
+        { enableHighAccuracy: true }
+      );
+    }
+
+    async function startCamera() {
+      const video = document.getElementById('cameraPreview');
+      const btn = document.getElementById('captureBtn');
+      try {
+        videoStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+        video.srcObject = videoStream;
+        video.style.display = 'block';
+        btn.style.display = 'inline-flex';
+      } catch (e) {
+        alert('Không thể mở Camera: ' + e.message);
+      }
+    }
+
+    function captureFromVideo() {
+      const video = document.getElementById('cameraPreview');
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = video.videoWidth || 1280;
+      tempCanvas.height = video.videoHeight || 720;
+      tempCanvas.getContext('2d').drawImage(video, 0, 0);
+      const img = new Image();
+      img.onload = function() {
+        baseImage = img;
+        renderStampOverlay();
+      };
+      img.src = tempCanvas.toDataURL('image/jpeg', 0.95);
+      if (videoStream) {
+        videoStream.getTracks().forEach(t => t.stop());
+      }
+      video.style.display = 'none';
+      document.getElementById('captureBtn').style.display = 'none';
+    }
+
+    function downloadStampedImage() {
+      renderStampOverlay();
+      const link = document.createElement('a');
+      const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+      link.download = `ANH_HIEN_TRUONG_STAMPED_${ts}.jpg`;
+      link.href = canvas.toDataURL('image/jpeg', 0.95);
+      link.click();
+    }
+
+    document.querySelectorAll('input').forEach(inp => inp.addEventListener('input', renderStampOverlay));
+    renderStampOverlay();
+  </script>
+</body>
+</html>

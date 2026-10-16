@@ -1,0 +1,21 @@
+name: anhsteam_field_inspector
+description: Ứng dụng Kiểm Tra, Khảo Sát & Giám Sát Hiện Trường, Chụp Ảnh Đóng Dấu Kỹ Thuật (GPS/La Bàn/SHA-256), Ghi Âm Hiện Trường & Xuất Biên Bản Nghiệm Thu (.docx) Chuẩn Nghị Định 207/2026/NĐ-CP & 30/2020/NĐ-CP - Anh's TEAM.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/logo_anhs_team.png
+    - assets/www/

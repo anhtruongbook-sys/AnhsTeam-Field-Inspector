@@ -1,0 +1,31 @@
+{
+  "project_code": "DA01-IBST",
+  "generated_at": "2026-10-16T13:31:31",
+  "inspector": "KS. Nguyễn Văn A (TVGS) - KS. Trần Văn B (NTTC)",
+  "legal_compliance": [
+    "Luật Xây dựng số 135/2025/QH15",
+    "Nghị định số 207/2026/NĐ-CP",
+    "Nghị định số 217/2026/NĐ-CP"
+  ],
+  "total_files": 2,
+  "evidence_items": [
+    {
+      "file_name": "DA01-IBST-B1-IMG-STR-0001_RAW.jpg",
+      "relative_path": "field_data\\photos\\DA01-IBST-B1-IMG-STR-0001_RAW.jpg",
+      "file_size_bytes": 142303,
+      "captured_at": "2026-10-16T13:31:31",
+      "zone": "Tầng hầm B1",
+      "grid_axis": "Trục (B-C)/(3-4)",
+      "sha256": "778ae74d83bbfdba9dd20c07e09b578f5a1e29b0fc3471a9b411f5f29d12f396"
+    },
+    {
+      "file_name": "DA01-IBST-B1-IMG-STR-0001_STAMPED.jpg",
+      "relative_path": "field_data\\photos\\DA01-IBST-B1-IMG-STR-0001_STAMPED.jpg",
+      "file_size_bytes": 273609,
+      "captured_at": "2026-10-16T13:31:31",
+      "zone": "Tầng hầm B1",
+      "grid_axis": "Trục (B-C)/(3-4)",
+      "sha256": "71df6d11fd47dc37c475d6cdd6bc4898c1aac67f442e7988b08e7e350101d049"
+    }
+  ]
+}
